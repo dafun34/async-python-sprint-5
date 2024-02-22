@@ -13,6 +13,6 @@ class File(Base):
     account_id = Column(String, ForeignKey("users.email"), nullable=False)
     name = Column(String)
     created_ad = Column(DateTime, default=datetime.utcnow)
-    path = Column(String, unique=True)
+    path = Column(String(length=300), unique=True)
     size = Column(Integer)
     is_downloadable = Column(Boolean, default=False)

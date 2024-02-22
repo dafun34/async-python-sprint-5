@@ -2,7 +2,6 @@ import os
 from typing import List, Union
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
-from fastapi.openapi.models import Response
 from fastapi.responses import ORJSONResponse
 from starlette import status
 
@@ -24,9 +23,8 @@ def get_path(path, file) -> str:
         # Если последний элемент содержит расширение файла,
         # считаем его частью пути к файлу собираем путь
         return str(os.path.join(*directory_parts))
-    else:
-        # в противном случае
-        return str(os.path.join(*directory_parts, file.filename))
+    # в противном случае
+    return str(os.path.join(*directory_parts, file.filename))
 
 
 @router.post("/upload", response_model=FileItem, status_code=201)
